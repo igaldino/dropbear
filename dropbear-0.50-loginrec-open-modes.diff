@@ -1,0 +1,29 @@
+--- dropbear-0.50/loginrec.c.orig	2007-08-08 17:39:37.000000000 +0200
++++ dropbear-0.50/loginrec.c	2008-01-07 11:13:13.000000000 +0100
+@@ -1313,7 +1313,7 @@
+ 
+ /* open the file (using filemode) and seek to the login entry */
+ static int
+-lastlog_openseek(struct logininfo *li, int *fd, int filemode)
++lastlog_openseek(struct logininfo *li, int *fd, int flags, mode_t mode)
+ {
+ 	off_t offset;
+ 	int type;
+@@ -1334,7 +1334,7 @@
+ 			return 0;
+ 	}
+ 
+-	*fd = open(lastlog_file, filemode);
++	*fd = open(lastlog_file, flags, mode);
+ 	if ( *fd < 0) {
+ 		dropbear_log(LOG_INFO, "lastlog_openseek: Couldn't open %s: %s",
+ 		    lastlog_file, strerror(errno));
+@@ -1364,7 +1364,7 @@
+ 	/* create our struct lastlog */
+ 	lastlog_construct(li, &last);
+ 
+-	if (!lastlog_openseek(li, &fd, O_RDWR|O_CREAT))
++	if (!lastlog_openseek(li, &fd, O_RDWR|O_CREAT, 0644))
+ 		return(0);
+ 
+ 	/* write the entry */
