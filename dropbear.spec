@@ -1,6 +1,6 @@
 Name:		dropbear
 Version:	0.50
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	SSH2 server and client
 
 Group:		Applications/Internet
@@ -74,6 +74,9 @@ fi
 %attr(0644,root,root) %{_mandir}/man8/dropbearkey.8*
 
 %changelog
+* Tue Feb 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.50-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
+
 * Mon Feb 18 2008 Fedora Release Engineering <rel-eng@fedoraproject.org> - 0.50-3
 - Autorebuild for GCC 4.3
 
