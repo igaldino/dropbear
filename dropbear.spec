@@ -1,6 +1,6 @@
 Name:		dropbear
-Version:	0.50
-Release:	5%{?dist}
+Version:	0.52
+Release:	1%{?dist}
 Summary:	SSH2 server and client
 
 Group:		Applications/Internet
@@ -8,12 +8,11 @@ License:	MIT
 URL:		http://matt.ucc.asn.au/dropbear/dropbear.html
 Source0:	http://matt.ucc.asn.au/dropbear/releases/dropbear-%{version}.tar.bz2
 Source1:	dropbear.init
-Patch1:		dropbear-0.50-loginrec-open-modes.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires:	zlib-devel
 Requires:	initscripts
-Requires(post):	chkconfig >= 0.9, /sbin/service
+Requires(post):	chkconfig >= 0.9, initscripts
 
 %description
 Dropbear is a relatively small SSH 2 server and client.  Dropbear
@@ -22,7 +21,6 @@ systems, such as wireless routers.
 
 %prep
 %setup -q
-%patch1 -p1
 
 # convert CHANGES to UTF-8
 iconv -f iso-8859-1 -t utf-8 -o CHANGES{.utf8,}
@@ -74,6 +72,9 @@ fi
 %attr(0644,root,root) %{_mandir}/man8/dropbearkey.8*
 
 %changelog
+* Mon Apr 19 2010 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 0.52-1
+- New version 0.5.2
+
 * Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.50-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
