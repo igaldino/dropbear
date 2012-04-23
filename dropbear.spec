@@ -1,6 +1,6 @@
 Name:		dropbear
 Version:	0.55
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	SSH2 server and client
 
 Group:		Applications/Internet
@@ -11,7 +11,7 @@ Source1:	dropbear.service
 Source2:	dropbear-keygen.service
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
-BuildRequires:	zlib-devel
+BuildRequires:	zlib-devel pam-devel
 Requires(post): systemd-units
 Requires(preun): systemd-units
 Requires(postun): systemd-units
@@ -31,7 +31,7 @@ iconv -f iso-8859-1 -t utf-8 -o CHANGES{.utf8,}
 mv CHANGES{.utf8,}
 
 %build
-%configure
+%configure --enable-pam
 make %{?_smp_mflags}
 
 %install
@@ -95,6 +95,9 @@ fi
 %attr(0644,root,root) %{_mandir}/man8/dropbearkey.8*
 
 %changelog
+* Mon Apr 22 2012 Jon Ciesla <limburgher@gmail.com> - 0.55-3
+- Enable pam support, fix unit file.
+
 * Fri Apr 20 2012 Jon Ciesla <limburgher@gmail.com> - 0.55-2
 - Migrate to systemd, BZ 770251.
 

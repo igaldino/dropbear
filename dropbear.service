@@ -6,7 +6,8 @@ After=network.target
 [Service]
 Type=forking
 PIDFile=/run/dropbear.pid
-ExecStart=/usr/sbin/dropbear 
+EnvironmentFile=-/etc/sysconfig/dropbear
+ExecStart=/usr/sbin/dropbear $OPTIONS
 
 [Install]
 WantedBy=multi-user.target
