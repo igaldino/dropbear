@@ -1,6 +1,6 @@
 Name:		dropbear
 Version:	0.55
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	SSH2 server and client
 
 Group:		Applications/Internet
@@ -95,6 +95,9 @@ fi
 %attr(0644,root,root) %{_mandir}/man8/dropbearkey.8*
 
 %changelog
+* Wed Jul 18 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.55-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
 * Mon Apr 22 2012 Jon Ciesla <limburgher@gmail.com> - 0.55-3
 - Enable pam support, fix unit file.
 
