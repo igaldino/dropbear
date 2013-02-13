@@ -1,6 +1,6 @@
 Name:		dropbear
 Version:	0.55
-Release:	4%{?dist}
+Release:	5%{?dist}
 Summary:	SSH2 server and client
 
 Group:		Applications/Internet
@@ -95,6 +95,9 @@ fi
 %attr(0644,root,root) %{_mandir}/man8/dropbearkey.8*
 
 %changelog
+* Wed Feb 13 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.55-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
 * Wed Jul 18 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.55-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
