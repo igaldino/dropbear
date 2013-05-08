@@ -1,12 +1,12 @@
 Name:		dropbear
-Version:	0.55
-Release:	5%{?dist}
+Version:	0.58
+Release:	1%{?dist}
 Summary:	SSH2 server and client
 
 Group:		Applications/Internet
 License:	MIT
 URL:		http://matt.ucc.asn.au/dropbear/dropbear.html
-Source0:	http://matt.ucc.asn.au/dropbear/releases/dropbear-2012.55.tar.bz2
+Source0:	http://matt.ucc.asn.au/dropbear/releases/dropbear-2013.58.tar.bz2
 Source1:	dropbear.service
 Source2:	dropbear-keygen.service
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
@@ -24,7 +24,7 @@ is particularly useful for "embedded"-type Linux (or other Unix)
 systems, such as wireless routers.
 
 %prep
-%setup -q -n dropbear-2012.55
+%setup -q -n dropbear-2013.58
 
 # convert CHANGES to UTF-8
 iconv -f iso-8859-1 -t utf-8 -o CHANGES{.utf8,}
@@ -95,6 +95,9 @@ fi
 %attr(0644,root,root) %{_mandir}/man8/dropbearkey.8*
 
 %changelog
+* Wed May 08 2013 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 0.58-1
+- new version
+
 * Wed Feb 13 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.55-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
