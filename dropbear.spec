@@ -1,30 +1,29 @@
-Name:		dropbear
-Version:	0.58
-Release:	1%{?dist}
-Summary:	SSH2 server and client
+Name:             dropbear
+Version:          0.58
+Release:          1%{?dist}
+Summary:          A lightweight SSH server and client
 
-Group:		Applications/Internet
-License:	MIT
-URL:		http://matt.ucc.asn.au/dropbear/dropbear.html
-Source0:	http://matt.ucc.asn.au/dropbear/releases/dropbear-2013.58.tar.bz2
-Source1:	dropbear.service
-Source2:	dropbear-keygen.service
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
+Group:            Applications/Internet
+License:          MIT
+URL:              http://matt.ucc.asn.au/dropbear/dropbear.html
+Source0:          http://matt.ucc.asn.au/%{name}/releases/%{name}-2013.58.tar.bz2
+Source1:          dropbear.service
+Source2:          dropbear-keygen.service
 
-BuildRequires:	zlib-devel pam-devel
-Requires(post): systemd-units
-Requires(preun): systemd-units
+BuildRequires:    zlib-devel pam-devel
+Requires(post):   systemd-units
+Requires(preun):  systemd-units
 Requires(postun): systemd-units
 # For triggerun
-Requires(post): systemd-sysv
+Requires(post):   systemd-sysv
 
 %description
-Dropbear is a relatively small SSH 2 server and client.  Dropbear
+Dropbear is a relatively small SSH server and client. Dropbear
 is particularly useful for "embedded"-type Linux (or other Unix)
 systems, such as wireless routers.
 
 %prep
-%setup -q -n dropbear-2013.58
+%setup -q -n %{name}-2013.58
 
 # convert CHANGES to UTF-8
 iconv -f iso-8859-1 -t utf-8 -o CHANGES{.utf8,}
@@ -35,7 +34,6 @@ mv CHANGES{.utf8,}
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make DESTDIR=$RPM_BUILD_ROOT install
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/dropbear
 install -d $RPM_BUILD_ROOT%{_unitdir}
@@ -46,9 +44,6 @@ install -m 0644 dbclient.1 $RPM_BUILD_ROOT%{_mandir}/man1/dbclient.1
 install -d $RPM_BUILD_ROOT%{_mandir}/man8
 install -m 0644 dropbear.8 $RPM_BUILD_ROOT%{_mandir}/man8/dropbear.8
 install -m 0644 dropbearkey.8 $RPM_BUILD_ROOT%{_mandir}/man8/dropbearkey.8
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %post
 if [ $1 -eq 1 ] ; then 
@@ -82,7 +77,6 @@ fi
 /bin/systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 
 %files
-%defattr(-,root,root)
 %doc CHANGES INSTALL LICENSE MULTI README SMALL TODO
 %attr(0755,root,root) %dir %{_sysconfdir}/dropbear
 %attr(0755,root,root) %{_unitdir}/dropbear*
