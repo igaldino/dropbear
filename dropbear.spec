@@ -1,6 +1,8 @@
+%global _hardened_build 1
+
 Name:             dropbear
 Version:          0.58
-Release:          1%{?dist}
+Release:          2%{?dist}
 Summary:          A lightweight SSH server and client
 
 Group:            Applications/Internet
@@ -89,6 +91,9 @@ fi
 %attr(0644,root,root) %{_mandir}/man8/dropbearkey.8*
 
 %changelog
+* Thu May 16 2013 Christopher Meng <rpm@cicku.me> - 0.58-2
+- Force PIE build for security issue.
+
 * Wed May 08 2013 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 0.58-1
 - new version
 
