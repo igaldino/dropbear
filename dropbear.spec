@@ -36,23 +36,22 @@ mv CHANGES{.utf8,}
 make %{?_smp_mflags}
 
 %install
-make DESTDIR=$RPM_BUILD_ROOT install
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/dropbear
-install -d $RPM_BUILD_ROOT%{_unitdir}
-install -m 0644 %{SOURCE1} $RPM_BUILD_ROOT%{_unitdir}/dropbear.service
-install -m 0644 %{SOURCE2} $RPM_BUILD_ROOT%{_unitdir}/dropbear-keygen.service
-install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install -m 0644 dbclient.1 $RPM_BUILD_ROOT%{_mandir}/man1/dbclient.1
-install -d $RPM_BUILD_ROOT%{_mandir}/man8
-install -m 0644 dropbear.8 $RPM_BUILD_ROOT%{_mandir}/man8/dropbear.8
-install -m 0644 dropbearkey.8 $RPM_BUILD_ROOT%{_mandir}/man8/dropbearkey.8
+make DESTDIR=%{buildroot} install
+install -d %{buildroot}%{_sysconfdir}/dropbear
+install -d %{buildroot}%{_unitdir}
+install -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/dropbear.service
+install -m 0644 %{SOURCE2} %{buildroot}%{_unitdir}/dropbear-keygen.service
+install -d %{buildroot}%{_mandir}/man1
+install -p -m 0644 dbclient.1 %{buildroot}%{_mandir}/man1/dbclient.1
+install -d %{buildroot}%{_mandir}/man8
+install -p -m 0644 dropbear.8 %{buildroot}%{_mandir}/man8/dropbear.8
+install -p -m 0644 dropbearkey.8 %{buildroot}%{_mandir}/man8/dropbearkey.8
 
 %post
 if [ $1 -eq 1 ] ; then 
     # Initial installation 
     /bin/systemctl daemon-reload >/dev/null 2>&1 || :
 fi
-
 
 %postun
 /bin/systemctl daemon-reload >/dev/null 2>&1 || :
@@ -79,7 +78,7 @@ fi
 /bin/systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 
 %files
-%doc CHANGES INSTALL LICENSE MULTI README SMALL TODO
+%doc CHANGES LICENSE README TODO
 %attr(0755,root,root) %dir %{_sysconfdir}/dropbear
 %attr(0755,root,root) %{_unitdir}/dropbear*
 %attr(0755,root,root) %{_bindir}/dropbearkey
