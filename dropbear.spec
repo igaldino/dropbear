@@ -90,7 +90,7 @@ fi
 %attr(0644,root,root) %{_mandir}/man8/dropbearkey.8*
 
 %changelog
-* Thu May 16 2013 Christopher Meng <rpm@cicku.me> - 0.58-2
+* Thu May 16 2013 Christopher Meng <rpm@cicku.me> - 0.58-3
 - Rebuilt.
 
 * Thu May 16 2013 Christopher Meng <rpm@cicku.me> - 0.58-2
