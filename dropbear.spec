@@ -2,7 +2,7 @@
 
 Name:             dropbear
 Version:          0.58
-Release:          3%{?dist}
+Release:          4%{?dist}
 Summary:          A lightweight SSH server and client
 
 Group:            Applications/Internet
@@ -90,6 +90,9 @@ fi
 %attr(0644,root,root) %{_mandir}/man8/dropbearkey.8*
 
 %changelog
+* Tue May 21 2013 Christopher Meng <rpm@cicku.me> - 0.58-4
+- Cleanup systemd unit files.
+
 * Thu May 16 2013 Christopher Meng <rpm@cicku.me> - 0.58-3
 - Rebuilt.
 
