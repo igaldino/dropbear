@@ -2,7 +2,7 @@
 
 Name:             dropbear
 Version:          0.58
-Release:          4%{?dist}
+Release:          5%{?dist}
 Summary:          A lightweight SSH server and client
 
 Group:            Applications/Internet
@@ -90,6 +90,9 @@ fi
 %attr(0644,root,root) %{_mandir}/man8/dropbearkey.8*
 
 %changelog
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.58-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
 * Tue May 21 2013 Christopher Meng <rpm@cicku.me> - 0.58-4
 - Cleanup systemd unit files.
 
