@@ -1,23 +1,24 @@
 %global _hardened_build 1
 
-Name:             dropbear
-Version:          0.58
-Release:          5%{?dist}
-Summary:          A lightweight SSH server and client
-
-Group:            Applications/Internet
-License:          MIT
-URL:              http://matt.ucc.asn.au/dropbear/dropbear.html
-Source0:          http://matt.ucc.asn.au/%{name}/releases/%{name}-2013.58.tar.bz2
-Source1:          dropbear.service
-Source2:          dropbear-keygen.service
-
-BuildRequires:    zlib-devel pam-devel
-Requires(post):   systemd-units
-Requires(preun):  systemd-units
-Requires(postun): systemd-units
+Name:              dropbear
+Version:           2013.59
+Release:           1%{?dist}
+Summary:           A lightweight SSH server and client
+License:           MIT
+URL:               http://matt.ucc.asn.au/dropbear/dropbear.html
+Source0:           http://matt.ucc.asn.au/%{name}/releases/%{name}-%{version}.tar.bz2
+Source1:           dropbear.service
+Source2:           dropbear-keygen.service
+BuildRequires:     libtomcrypt-devel
+BuildRequires:     libtommath-devel
+BuildRequires:     pam-devel
+BuildRequires:     systemd
+BuildRequires:     zlib-devel
+Requires(post):    systemd
+Requires(preun):   systemd
+Requires(postun):  systemd
 # For triggerun
-Requires(post):   systemd-sysv
+Requires(post):    systemd-sysv
 
 %description
 Dropbear is a relatively small SSH server and client. Dropbear
@@ -25,9 +26,7 @@ is particularly useful for "embedded"-type Linux (or other Unix)
 systems, such as wireless routers.
 
 %prep
-%setup -q -n %{name}-2013.58
-
-# convert CHANGES to UTF-8
+%setup -q
 iconv -f iso-8859-1 -t utf-8 -o CHANGES{.utf8,}
 mv CHANGES{.utf8,}
 
@@ -36,60 +35,51 @@ mv CHANGES{.utf8,}
 make %{?_smp_mflags}
 
 %install
-make DESTDIR=%{buildroot} install
-install -d %{buildroot}%{_sysconfdir}/dropbear
+make install DESTDIR=%{buildroot}
+install -d %{buildroot}%{_sysconfdir}/%{name}
 install -d %{buildroot}%{_unitdir}
-install -m 0644 %{SOURCE1} %{buildroot}%{_unitdir}/dropbear.service
-install -m 0644 %{SOURCE2} %{buildroot}%{_unitdir}/dropbear-keygen.service
-install -d %{buildroot}%{_mandir}/man1
-install -p -m 0644 dbclient.1 %{buildroot}%{_mandir}/man1/dbclient.1
-install -d %{buildroot}%{_mandir}/man8
-install -p -m 0644 dropbear.8 %{buildroot}%{_mandir}/man8/dropbear.8
-install -p -m 0644 dropbearkey.8 %{buildroot}%{_mandir}/man8/dropbearkey.8
+install -m644 %{S:1} %{buildroot}%{_unitdir}/%{name}.service
+install -m644 %{S:2} %{buildroot}%{_unitdir}/dropbear-keygen.service
 
 %post
-if [ $1 -eq 1 ] ; then 
-    # Initial installation 
-    /bin/systemctl daemon-reload >/dev/null 2>&1 || :
-fi
+%systemd_post %{name}.service
 
 %postun
-/bin/systemctl daemon-reload >/dev/null 2>&1 || :
-if [ $1 -ge 1 ] ; then
-    # Package upgrade, not uninstall
-    /bin/systemctl try-restart dropbear.service >/dev/null 2>&1 || :
-fi
+%systemd_postun_with_restart %{name}.service
 
 %preun
-if [ $1 -eq 0 ] ; then
-    # Package removal, not upgrade
-    /bin/systemctl --no-reload disable dropbear.service > /dev/null 2>&1 || :
-    /bin/systemctl stop dropbear.service > /dev/null 2>&1 || :
-fi
+%systemd_preun %{name}.service
 
 %triggerun -- dropbear < 0.55-2
 # Save the current service runlevel info
 # User must manually run systemd-sysv-convert --apply dropbear
 # to migrate them to systemd targets
-/usr/bin/systemd-sysv-convert --save dropbear >/dev/null 2>&1 ||:
+systemd-sysv-convert --save dropbear >/dev/null 2>&1 ||:
 
 # Run these because the SysV package being removed won't do them
-/sbin/chkconfig --del dropbear >/dev/null 2>&1 || :
-/bin/systemctl try-restart dropbear.service >/dev/null 2>&1 || :
+chkconfig --del dropbear >/dev/null 2>&1 || :
+systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 
 %files
 %doc CHANGES LICENSE README TODO
-%attr(0755,root,root) %dir %{_sysconfdir}/dropbear
-%attr(0755,root,root) %{_unitdir}/dropbear*
+%dir %{_sysconfdir}/dropbear
+%{_unitdir}/dropbear*
 %attr(0755,root,root) %{_bindir}/dropbearkey
 %attr(0755,root,root) %{_bindir}/dropbearconvert
 %attr(0755,root,root) %{_bindir}/dbclient
 %attr(0755,root,root) %{_sbindir}/dropbear
-%attr(0644,root,root) %{_mandir}/man1/dbclient.1*
-%attr(0644,root,root) %{_mandir}/man8/dropbear.8*
-%attr(0644,root,root) %{_mandir}/man8/dropbearkey.8*
+%{_mandir}/man1/*.1*
+%{_mandir}/man8/*.8*
 
 %changelog
+* Mon Oct 07 2013 Christopher Meng <rpm@cicku.me> - 2013.59-1
+- New version.
+- Adapt the version tag to match the actual one.
+- Add systemd BR(BZ#992141).
+- Unbundle libtom libraries(BZ#992141).
+- Add AArch64 support(BZ#925278).
+- SPEC cleanup.
+
 * Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.58-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
@@ -111,7 +101,7 @@ fi
 * Wed Jul 18 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.55-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
-* Mon Apr 22 2012 Jon Ciesla <limburgher@gmail.com> - 0.55-3
+* Sun Apr 22 2012 Jon Ciesla <limburgher@gmail.com> - 0.55-3
 - Enable pam support, fix unit file.
 
 * Fri Apr 20 2012 Jon Ciesla <limburgher@gmail.com> - 0.55-2
@@ -138,7 +128,7 @@ fi
 * Mon Feb 18 2008 Fedora Release Engineering <rel-eng@fedoraproject.org> - 0.50-3
 - Autorebuild for GCC 4.3
 
-* Mon Jan 10 2008 Lennert Buytenhek <buytenh@wantstofly.org> - 0.50-2
+* Thu Jan 10 2008 Lennert Buytenhek <buytenh@wantstofly.org> - 0.50-2
 - Incorporate changes from Fedora package review:
   - Use full URL for Source0.
   - Ship dropbear.init with mode 0644 in the SRPM.
