@@ -1,7 +1,7 @@
 %global _hardened_build 1
 
 Name:              dropbear
-Version:           2013.59
+Version:           2013.62
 Release:           1%{?dist}
 Summary:           A lightweight SSH server and client
 License:           MIT
@@ -38,8 +38,8 @@ make %{?_smp_mflags}
 make install DESTDIR=%{buildroot}
 install -d %{buildroot}%{_sysconfdir}/%{name}
 install -d %{buildroot}%{_unitdir}
-install -m644 %{S:1} %{buildroot}%{_unitdir}/%{name}.service
-install -m644 %{S:2} %{buildroot}%{_unitdir}/dropbear-keygen.service
+install -pm644 %{S:1} %{buildroot}%{_unitdir}/%{name}.service
+install -pm644 %{S:2} %{buildroot}%{_unitdir}/dropbear-keygen.service
 
 %post
 %systemd_post %{name}.service
@@ -64,14 +64,17 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %doc CHANGES LICENSE README TODO
 %dir %{_sysconfdir}/dropbear
 %{_unitdir}/dropbear*
-%attr(0755,root,root) %{_bindir}/dropbearkey
-%attr(0755,root,root) %{_bindir}/dropbearconvert
-%attr(0755,root,root) %{_bindir}/dbclient
-%attr(0755,root,root) %{_sbindir}/dropbear
+%{_bindir}/dropbearkey
+%{_bindir}/dropbearconvert
+%{_bindir}/dbclient
+%{_sbindir}/dropbear
 %{_mandir}/man1/*.1*
 %{_mandir}/man8/*.8*
 
 %changelog
+* Wed Dec 04 2013 Christopher Meng <rpm@cicku.me> - 2013.62-1
+- Update to 2013.62
+
 * Mon Oct 07 2013 Christopher Meng <rpm@cicku.me> - 2013.59-1
 - New version.
 - Adapt the version tag to match the actual one.
