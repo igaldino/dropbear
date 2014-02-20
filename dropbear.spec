@@ -1,7 +1,7 @@
 %global _hardened_build 1
 
 Name:              dropbear
-Version:           2013.62
+Version:           2014.63
 Release:           1%{?dist}
 Summary:           A lightweight SSH server and client
 License:           MIT
@@ -31,7 +31,7 @@ iconv -f iso-8859-1 -t utf-8 -o CHANGES{.utf8,}
 mv CHANGES{.utf8,}
 
 %build
-%configure --enable-pam
+%configure --enable-pam --disable-bundled-libtom
 make %{?_smp_mflags}
 
 %install
@@ -72,6 +72,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Wed Feb 19 2014 Christopher Meng <rpm@cicku.me> - 2014.63-1
+- Update to 2014.63
+
 * Wed Dec 04 2013 Christopher Meng <rpm@cicku.me> - 2013.62-1
 - Update to 2013.62
 
