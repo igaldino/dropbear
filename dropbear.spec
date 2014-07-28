@@ -32,10 +32,10 @@ mv CHANGES{.utf8,}
 
 %build
 %configure --enable-pam --disable-bundled-libtom
-make %{?_smp_mflags}
+%make_build
 
 %install
-make install DESTDIR=%{buildroot}
+%make_install
 install -d %{buildroot}%{_sysconfdir}/%{name}
 install -d %{buildroot}%{_unitdir}
 install -pm644 %{S:1} %{buildroot}%{_unitdir}/%{name}.service
