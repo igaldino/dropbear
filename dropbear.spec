@@ -1,7 +1,7 @@
 %global _hardened_build 1
 
 Name:              dropbear
-Version:           2014.64
+Version:           2014.65
 Release:           1%{?dist}
 Summary:           A lightweight SSH server and client
 License:           MIT
@@ -72,6 +72,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Fri Aug 08 2014 Christopher Meng <rpm@cicku.me> - 2014.65-1
+- Update to 2014.65
+
 * Mon Jul 28 2014 Christopher Meng <rpm@cicku.me> - 2014.64-1
 - Update to 2014.64
 
