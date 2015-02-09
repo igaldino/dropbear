@@ -1,12 +1,12 @@
 %global _hardened_build 1
 
 Name:              dropbear
-Version:           2014.65
-Release:           2%{?dist}
+Version:           2015.67
+Release:           1%{?dist}
 Summary:           A lightweight SSH server and client
 License:           MIT
-URL:               http://matt.ucc.asn.au/dropbear/dropbear.html
-Source0:           http://matt.ucc.asn.au/%{name}/releases/%{name}-%{version}.tar.bz2
+URL:               https://matt.ucc.asn.au/dropbear/dropbear.html
+Source0:           https://matt.ucc.asn.au/%{name}/releases/%{name}-%{version}.tar.bz2
 Source1:           dropbear.service
 Source2:           dropbear-keygen.service
 BuildRequires:     libtomcrypt-devel
@@ -61,7 +61,8 @@ chkconfig --del dropbear >/dev/null 2>&1 || :
 systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 
 %files
-%doc CHANGES LICENSE README TODO
+%doc CHANGES README TODO
+%license LICENSE
 %dir %{_sysconfdir}/dropbear
 %{_unitdir}/dropbear*
 %{_bindir}/dropbearkey
@@ -72,6 +73,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Sun Feb 01 2015 Christopher Meng <rpm@cicku.me> - 2015.67-1
+- Update to 2015.67
+
 * Sat Aug 16 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2014.65-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
