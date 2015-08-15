@@ -1,9 +1,9 @@
 %global _hardened_build 1
 
 Name:              dropbear
-Version:           2015.67
-Release:           2%{?dist}
-Summary:           A lightweight SSH server and client
+Version:           2015.68
+Release:           1%{?dist}
+Summary:           Lightweight SSH server and client
 License:           MIT
 URL:               https://matt.ucc.asn.au/dropbear/dropbear.html
 Source0:           https://matt.ucc.asn.au/%{name}/releases/%{name}-%{version}.tar.bz2
@@ -21,9 +21,8 @@ Requires(postun):  systemd
 Requires(post):    systemd-sysv
 
 %description
-Dropbear is a relatively small SSH server and client. Dropbear
-is particularly useful for "embedded"-type Linux (or other Unix)
-systems, such as wireless routers.
+Dropbear is a relatively small SSH server and client. It's particularly useful
+for "embedded"-type Linux (or other Unix) systems, such as wireless routers.
 
 %prep
 %setup -q
@@ -73,6 +72,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Sun Aug 09 2015 Christopher Meng <rpm@cicku.me> - 2015.68-1
+- Update to 2015.68
+
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2015.67-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
