@@ -1,7 +1,7 @@
 %global _hardened_build 1
 
 Name:              dropbear
-Version:           2015.68
+Version:           2015.71
 Release:           1%{?dist}
 Summary:           Lightweight SSH server and client
 License:           MIT
@@ -72,6 +72,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Fri Dec 04 2015 Fedora Release Monitoring <release-monitoring@fedoraproject.org> - 2015.71-1
+- Update to 2015.71 (#1251704)
+
 * Sun Aug 09 2015 Christopher Meng <rpm@cicku.me> - 2015.68-1
 - Update to 2015.68
 
