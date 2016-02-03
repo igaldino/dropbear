@@ -2,7 +2,7 @@
 
 Name:              dropbear
 Version:           2015.71
-Release:           1%{?dist}
+Release:           2%{?dist}
 Summary:           Lightweight SSH server and client
 License:           MIT
 URL:               https://matt.ucc.asn.au/dropbear/dropbear.html
@@ -72,6 +72,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2015.71-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Fri Dec 04 2015 Fedora Release Monitoring <release-monitoring@fedoraproject.org> - 2015.71-1
 - Update to 2015.71 (#1251704)
 
