@@ -1,8 +1,8 @@
 %global _hardened_build 1
 
 Name:              dropbear
-Version:           2016.74
-Release:           2%{?dist}
+Version:           2017.75
+Release:           1%{?dist}
 Summary:           Lightweight SSH server and client
 License:           MIT
 URL:               https://matt.ucc.asn.au/dropbear/dropbear.html
@@ -72,6 +72,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Fri May 26 2017 Lennert Buytenhek <buytenh@wantstofly.org> - 2017.75-1
+- Update to 2017.75 (#1452738)
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2016.74-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
