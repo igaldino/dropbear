@@ -2,7 +2,7 @@
 
 Name:              dropbear
 Version:           2017.75
-Release:           4%{?dist}
+Release:           5%{?dist}
 Summary:           Lightweight SSH server and client
 License:           MIT
 URL:               https://matt.ucc.asn.au/dropbear/dropbear.html
@@ -72,6 +72,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Sat Jan 20 2018 Björn Esser <besser82@fedoraproject.org> - 2017.75-5
+- Rebuilt for switch to libxcrypt
+
 * Mon Oct 23 2017 Simone Caronni <negativo17@gmail.com> - 2017.75-4
 - Rebuild for libtomcrypt update.
 
