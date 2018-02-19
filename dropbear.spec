@@ -2,13 +2,14 @@
 
 Name:              dropbear
 Version:           2017.75
-Release:           6%{?dist}
+Release:           7%{?dist}
 Summary:           Lightweight SSH server and client
 License:           MIT
 URL:               https://matt.ucc.asn.au/dropbear/dropbear.html
 Source0:           https://matt.ucc.asn.au/%{name}/releases/%{name}-%{version}.tar.bz2
 Source1:           dropbear.service
 Source2:           dropbear-keygen.service
+BuildRequires:     gcc
 BuildRequires:     libtomcrypt-devel
 BuildRequires:     libtommath-devel
 BuildRequires:     pam-devel
@@ -72,6 +73,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Mon Feb 19 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2017.75-7
+- add gcc into buildrequires
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2017.75-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
