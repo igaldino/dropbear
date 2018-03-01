@@ -1,8 +1,8 @@
 %global _hardened_build 1
 
 Name:              dropbear
-Version:           2017.75
-Release:           7%{?dist}
+Version:           2018.76
+Release:           1%{?dist}
 Summary:           Lightweight SSH server and client
 License:           MIT
 URL:               https://matt.ucc.asn.au/dropbear/dropbear.html
@@ -14,12 +14,10 @@ BuildRequires:     libtomcrypt-devel
 BuildRequires:     libtommath-devel
 BuildRequires:     pam-devel
 BuildRequires:     systemd
-BuildRequires:     zlib-devel
-Requires(post):    systemd
-Requires(preun):   systemd
-Requires(postun):  systemd
+%{?systemd_requires}
 # For triggerun
 Requires(post):    systemd-sysv
+BuildRequires:     zlib-devel
 
 %description
 Dropbear is a relatively small SSH server and client. It's particularly useful
@@ -61,7 +59,7 @@ chkconfig --del dropbear >/dev/null 2>&1 || :
 systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 
 %files
-%doc CHANGES README TODO
+%doc CHANGES README
 %license LICENSE
 %dir %{_sysconfdir}/dropbear
 %{_unitdir}/dropbear*
@@ -73,6 +71,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Wed Feb 28 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2018.76-1
+- new version 2018.76
+
 * Mon Feb 19 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2017.75-7
 - add gcc into buildrequires
 
