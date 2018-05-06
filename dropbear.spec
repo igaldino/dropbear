@@ -2,7 +2,7 @@
 
 Name:              dropbear
 Version:           2018.76
-Release:           1%{?dist}
+Release:           2%{?dist}
 Summary:           Lightweight SSH server and client
 License:           MIT
 URL:               https://matt.ucc.asn.au/dropbear/dropbear.html
@@ -30,6 +30,11 @@ mv CHANGES{.utf8,}
 
 %build
 %configure --enable-pam --disable-bundled-libtom
+
+cat > localoptions.h <<EOT
+#define SFTPSERVER_PATH "/usr/libexec/openssh/sftp-server"
+EOT
+
 %make_build
 
 %install
@@ -71,6 +76,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Sun May 06 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2018.76-2
+- adjust sftp-server path
+
 * Wed Feb 28 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2018.76-1
 - new version 2018.76
 
