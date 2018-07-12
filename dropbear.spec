@@ -2,7 +2,7 @@
 
 Name:              dropbear
 Version:           2018.76
-Release:           2%{?dist}
+Release:           3%{?dist}
 Summary:           Lightweight SSH server and client
 License:           MIT
 URL:               https://matt.ucc.asn.au/dropbear/dropbear.html
@@ -76,6 +76,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Thu Jul 12 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2018.76-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Sun May 06 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2018.76-2
 - adjust sftp-server path
 
