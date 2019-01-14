@@ -2,7 +2,7 @@
 
 Name:              dropbear
 Version:           2018.76
-Release:           3%{?dist}
+Release:           4%{?dist}
 Summary:           Lightweight SSH server and client
 License:           MIT
 URL:               https://matt.ucc.asn.au/dropbear/dropbear.html
@@ -76,6 +76,9 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Mon Jan 14 2019 Björn Esser <besser82@fedoraproject.org> - 2018.76-4
+- Rebuilt for libcrypt.so.2 (#1666033)
+
 * Thu Jul 12 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2018.76-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
