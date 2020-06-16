@@ -1,8 +1,8 @@
 %global _hardened_build 1
 
 Name:              dropbear
-Version:           2019.78
-Release:           3%{?dist}
+Version:           2020.79
+Release:           1%{?dist}
 Summary:           Lightweight SSH server and client
 License:           MIT
 URL:               https://matt.ucc.asn.au/dropbear/dropbear.html
@@ -76,13 +76,16 @@ systemctl try-restart dropbear.service >/dev/null 2>&1 || :
 %{_mandir}/man8/*.8*
 
 %changelog
+* Tue Jun 16 2020 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2020.79-1
+- new version 2020.79
+
 * Tue Jan 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 2019.78-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
 * Wed Jul 24 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2019.78-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
-* Thu Mar 27 2019 Daniel Lara <danniel@fedoraproject.org> - 2019.78.1
+* Wed Mar 27 2019 Daniel Lara <danniel@fedoraproject.org> - 2019.78.1
 - new version 2019.78
 
 * Thu Jan 31 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2018.76-5
